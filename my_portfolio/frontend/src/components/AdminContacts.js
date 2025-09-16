@@ -9,9 +9,14 @@ function AdminContacts() {
   const [input, setInput] = useState('');
   const [error, setError] = useState('');
 
+  // Use the same API base override as the contact form to bypass CRA proxy
+  const RAW_API_BASE_URL = process.env.REACT_APP_API_BASE_URL || '';
+  const API_BASE_URL = RAW_API_BASE_URL ? RAW_API_BASE_URL.replace(/\/+$/, '') : '';
+
   useEffect(() => {
     if (auth) {
-      fetch('/admin/contacts', {
+      const url = API_BASE_URL ? `${API_BASE_URL}/admin/contacts` : '/admin/contacts';
+      fetch(url, {
         headers: {
           'Authorization': `Bearer ${ADMIN_PASSWORD}`,
         },
@@ -21,9 +26,13 @@ function AdminContacts() {
           return res.json();
         })
         .then(data => setContacts(data))
-        .catch(() => setError('Unauthorized'));
+        .catch((e) => {
+          // eslint-disable-next-line no-console
+          console.error('Failed to load contacts', { e, url });
+          setError('Unauthorized');
+        });
     }
-  }, [auth]);
+  }, [auth, API_BASE_URL]);
 
   const handleLogin = (e) => {
     e.preventDefault();
