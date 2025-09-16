@@ -220,13 +220,13 @@ function Contact() {
           <div className="contact-label">FULL STOP IS...</div>
           <div className="contact-team">
             <div>
-              <b>Jay Fanelli</b> / Design
+              <b>Pyaspi Rai</b> / Design
             </div>
             <div>
-              <b>Nathan Peretic</b> / Front-End
+              <b>Pyaspi Rai</b> / Front-End
             </div>
             <div>
-              <b>Matthew Chambers</b> / Back-End
+              <b>Pyaspi Rai</b> / Back-End
             </div>
           </div>
         </div>
