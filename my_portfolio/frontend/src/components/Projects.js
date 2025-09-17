@@ -17,7 +17,7 @@ function Projects() {
             color:'#8bc34a',
             fontWeight:'bold',
             fontSize:'1.1rem',
-            backgroundImage: 'url(/Portfolio/project1.jpg)',
+            backgroundImage: `url(${process.env.PUBLIC_URL}/Portfolio/project1.jpg)`,
             backgroundSize: 'cover',
             backgroundPosition: 'center'
           }}>Image</div>
@@ -39,7 +39,7 @@ function Projects() {
             color:'#388e3c',
             fontWeight:'bold',
             fontSize:'1.1rem',
-            backgroundImage: 'url(${process.env.PUBLIC_URL}/project.png)',
+            backgroundImage: `url(${process.env.PUBLIC_URL}/project.png)`,
             backgroundSize: 'cover',
             backgroundPosition: 'center'
           }}>Image</div>
