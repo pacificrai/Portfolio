@@ -17,7 +17,7 @@ function Projects() {
             color:'#8bc34a',
             fontWeight:'bold',
             fontSize:'1.1rem',
-            backgroundImage: 'url(/my_portfolio/project1.jpg)',
+            backgroundImage: 'url(/Portfolio/project1.jpg)',
             backgroundSize: 'cover',
             backgroundPosition: 'center'
           }}>Image</div>
