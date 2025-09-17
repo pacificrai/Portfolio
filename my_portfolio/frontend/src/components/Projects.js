@@ -17,7 +17,7 @@ function Projects() {
             color:'#8bc34a',
             fontWeight:'bold',
             fontSize:'1.1rem',
-            backgroundImage: 'url(${process.env.PUBLIC_URL}/project1.jpg)',
+            backgroundImage: 'url(/my_portfolio/project1.jpg)',
             backgroundSize: 'cover',
             backgroundPosition: 'center'
           }}>Image</div>
