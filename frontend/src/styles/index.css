@@ -691,6 +691,81 @@ body.light {
 .portfolio-root-topnav.light .top-navbar .mode-toggle button {
   color: #222;
 }
+
+/* Mobile actions: mode toggle then hamburger on the right */
+.mobile-actions {
+  margin-left: auto;
+  display: none;
+  align-items: center;
+  gap: 0.5rem;
+}
+.desktop-only { display: flex; align-items: center; margin-left: 1rem; }
+.hamburger-btn {
+  background: none;
+  border: 1.5px solid rgba(255,255,255,0.35);
+  color: #fff;
+  border-radius: 8px;
+  width: 40px;
+  height: 36px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.portfolio-root-topnav.light .hamburger-btn {
+  color: #222;
+  border-color: rgba(0,0,0,0.25);
+}
+.mobile-menu {
+  display: none;
+}
+
+/* Responsive behavior: hide desktop links on small screens */
+@media (max-width: 900px) {
+  .nav-links-group { display: none; }
+  .mobile-actions { display: flex; }
+  /* Ensure the desktop toggle never shows on small screens */
+  .mode-toggle.desktop-only { display: none !important; }
+  .mobile-menu {
+    display: block;
+    position: fixed;
+    top: 54px;
+    right: 0.5rem;
+    left: auto;
+    width: 260px;
+    max-width: calc(100vw - 1rem);
+    background: rgba(16, 24, 42, 0.98);
+    backdrop-filter: saturate(150%) blur(8px);
+    z-index: 999;
+    padding: 0.6rem 0.8rem 0.9rem 0.8rem;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.12);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+  }
+  .portfolio-root-topnav.light .mobile-menu {
+    background: #f5f5f5;
+    border: 1px solid rgba(0,0,0,0.12);
+  }
+  .mobile-menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0.2rem 0.6rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .mobile-menu a {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    padding: 0.7rem 0.9rem;
+    border-radius: 8px;
+    background: transparent;
+  }
+  .mobile-menu a.active,
+  .mobile-menu a:hover { background: #23243a; color: #00bcd4; }
+  .portfolio-root-topnav.light .mobile-menu a { color: #222; }
+  .portfolio-root-topnav.light .mobile-menu a.active,
+  .portfolio-root-topnav.light .mobile-menu a:hover { background: #2196f3; color: #fff; }
+}
 .main-content-topnav {
   padding-top: 80px; /* Adjust to match header height including padding */
   width: 100%;
@@ -1019,6 +1094,30 @@ main {
   transform: scale(1);
 }
 
+/* Improve readability and avoid clipping on mobile */
+@media (max-width: 700px) {
+  .project-list { gap: 1rem; }
+  .project-card {
+    padding: 1rem 0.9rem 0.9rem 0.9rem;
+    min-width: 0;
+  }
+  .project-card h3 {
+    font-size: 1.2rem;
+    line-height: 1.35;
+    margin: 0.25rem 0 0.5rem 0;
+  }
+  .project-card p {
+    font-size: 0.98rem;
+    line-height: 1.55;
+    margin: 0;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+  }
+  .project-badges .badge { font-size: 0.75rem; }
+  /* Disable scale animation on small screens to prevent text crop glitches */
+  .project-card.animate-zoominout { animation: none; transform: none; opacity: 1; }
+}
+
 
 
 .project-card.featured {
@@ -1186,8 +1285,8 @@ main {
 @media (max-width: 900px) {
   .contact.contact-grid {
     flex-direction: column;
-    padding: 1.5rem 0.5rem;
-    gap: 2rem;
+    padding: 1.25rem 0.75rem;
+    gap: 1.25rem;
   }
   .contact-left, .contact-right {
     min-width: 0;
@@ -1195,6 +1294,57 @@ main {
 }
 
 @media (max-width: 600px) {
+  /* Simpler, cleaner mobile Contact */
+  section#contact {
+    background: #10182a;
+  }
+  .contact.contact-grid {
+    border-radius: 14px;
+    box-shadow: 0 8px 28px rgba(0,0,0,0.22);
+    padding: 1rem 0.75rem 1.1rem 0.75rem;
+    gap: 1rem;
+  }
+  .contact-title {
+    font-size: 1.6rem;
+    text-align: center;
+  }
+  .contact-desc {
+    font-size: 0.95rem;
+    color: #b9bed1;
+    text-align: center;
+    margin-bottom: 1.2rem;
+  }
+  .contact-form {
+    gap: 0.8rem;
+  }
+  .contact-form input,
+  .contact-form textarea {
+    font-size: 16px; /* avoid iOS zoom */
+    padding: 0.9rem 1rem;
+    border-radius: 12px;
+    background: #1b2337;
+    border: 1px solid #2b3550;
+  }
+  .contact-form textarea {
+    min-height: 100px;
+  }
+  .contact-btn {
+    width: 100%;
+    border-radius: 12px;
+    padding: 0.95rem 1rem;
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+  }
+  .status { text-align: center; }
+
+  /* Stack contact info blocks in a compact way */
+  .contact-right {
+    gap: 0.9rem;
+  }
+  .contact-value { font-size: 1.05rem; }
+  .contact-phone { font-size: 1.2rem; }
+  .contact-social-icon { width: 40px; height: 40px; }
+
   .portfolio-container {
     max-width: 100%;
     border-radius: 0;

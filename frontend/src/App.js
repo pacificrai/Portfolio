@@ -24,6 +24,7 @@ function App() {
     const saved = localStorage.getItem('portfolio-dark-mode');
     return saved ? JSON.parse(saved) : true;
   });
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [active, setActive] = useState('hero');
   const [showThankYou, setShowThankYou] = useState(false);
   const sectionRefs = useRef({});
@@ -63,10 +64,20 @@ function App() {
     if (ref) {
       ref.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
+    setMobileMenuOpen(false);
   };
 
+  const basename = (() => {
+    try {
+      const u = new URL(process.env.PUBLIC_URL || '/', window.location.origin);
+      return u.pathname.endsWith('/') ? u.pathname.slice(0, -1) : u.pathname;
+    } catch (_e) {
+      return '';
+    }
+  })();
+
   return (
-    <Router>
+    <Router basename={basename}>
       <Routes>
         <Route
           path="/admin/contacts"
@@ -92,18 +103,52 @@ function App() {
                         >
                           {label}
                         </a>
-                        {label === 'Contact' && (
-                          <div className="mode-toggle mode-toggle-separate" style={{marginLeft: '1.2rem'}}>
-                            <button onClick={() => setDarkMode(m => !m)} aria-label="Toggle dark/light mode">
-                              {darkMode ? '🌙' : '☀️'}
-                            </button>
-                          </div>
-                        )}
                       </li>
                     ))}
                   </ul>
                 </div>
+                {/* Desktop dark/light toggle (hidden on mobile) */}
+                <div className="mode-toggle desktop-only">
+                  <button onClick={() => setDarkMode(m => !m)} aria-label="Toggle dark/light mode">
+                    {darkMode ? '🌙' : '☀️'}
+                  </button>
+                </div>
+                <div className="mobile-actions">
+                  <div className="mode-toggle">
+                    <button onClick={() => setDarkMode(m => !m)} aria-label="Toggle dark/light mode">
+                      {darkMode ? '🌙' : '☀️'}
+                    </button>
+                  </div>
+                  <button
+                    className={`hamburger-btn${mobileMenuOpen ? ' open' : ''}`}
+                    aria-label="Toggle menu"
+                    aria-expanded={mobileMenuOpen}
+                    onClick={() => setMobileMenuOpen(o => !o)}
+                  >
+                    {mobileMenuOpen ? '✕' : '☰'}
+                  </button>
+                </div>
               </nav>
+              {mobileMenuOpen && (
+                <div className="mobile-menu">
+                  <ul>
+                    {SECTIONS.map(({ id, label }) => (
+                      <li key={id}>
+                        <a
+                          href={`#${id}`}
+                          className={active === id ? 'active' : ''}
+                          onClick={e => {
+                            e.preventDefault();
+                            scrollToSection(id);
+                          }}
+                        >
+                          {label}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
               {/* Toast popup (1.5s) */}
               <div className={`toast-notice${showThankYou ? ' show' : ''}`}>
                 Thanks for your information 🎉
